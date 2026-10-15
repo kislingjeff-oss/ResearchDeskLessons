@@ -64,7 +64,7 @@ h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--mark) 6
 .stop.done .n::after{content:"✓"}
 .stop.done .n span{display:none}
 .meter{height:6px;border-radius:999px;background:var(--mist);overflow:hidden;margin-top:8px}
-.meter i{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width 8.8s ease}
+.meter i{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width 17.6s ease}
 .meter-label{font-size:.8rem;color:var(--ink-3);margin-top:6px;font-variant-numeric:tabular-nums}
 
 /* Lesson */
@@ -104,15 +104,15 @@ main{padding-block:18px 56px}
 .mode.watch{background:var(--accent);color:var(--on-accent)}
 .mode.try{background:var(--turn);color:#fff}
 .stage-body{padding:14px;display:grid;gap:12px;min-height:420px;align-content:start}
-.caption{position:absolute;left:12px;right:12px;bottom:12px;z-index:30;background:var(--ink);color:var(--paper);border-radius:10px;padding:10px 14px;font-weight:600;font-size:.95rem;box-shadow:var(--shadow);transform:translateY(8px);opacity:0;transition:opacity 3.6s,transform 3.6s;pointer-events:none}
+.caption{position:absolute;left:12px;right:12px;bottom:12px;z-index:30;background:var(--ink);color:var(--paper);border-radius:10px;padding:10px 14px;font-weight:600;font-size:.95rem;box-shadow:var(--shadow);transform:translateY(8px);opacity:0;transition:opacity 7.2s,transform 7.2s;pointer-events:none}
 .caption.show{opacity:1;transform:none}
-.pointer{position:absolute;z-index:40;left:0;top:0;width:26px;height:26px;pointer-events:none;transition:transform 10.4s cubic-bezier(.5,0,.2,1),opacity 3.2s;opacity:0}
+.pointer{position:absolute;z-index:40;left:0;top:0;width:26px;height:26px;pointer-events:none;transition:transform 20.8s cubic-bezier(.5,0,.2,1),opacity 6.4s;opacity:0}
 .pointer.show{opacity:1}
 .pointer svg{display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .pointer .ring{position:absolute;left:-10px;top:-10px;width:26px;height:26px;border-radius:50%;border:3px solid var(--turn);opacity:0}
-.pointer.tap .ring{animation:tap 7.2s ease-out}
+.pointer.tap .ring{animation:tap 14.4s ease-out}
 @keyframes tap{from{transform:scale(.4);opacity:1}to{transform:scale(1.7);opacity:0}}
-.glow{animation:glow 16s ease-in-out 2}
+.glow{animation:glow 32s ease-in-out 2}
 @keyframes glow{50%{box-shadow:0 0 0 4px var(--turn-2),0 0 0 6px var(--turn)}}
 
 /* Mini desk parts */
@@ -122,7 +122,7 @@ main{padding-block:18px 56px}
 .m-tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
 .pill{min-width:22px;padding:1px 7px;border-radius:999px;background:var(--mist);font-size:.74rem;font-variant-numeric:tabular-nums;text-align:center;display:inline-block}
 .m-tab[aria-selected="true"] .pill,.pill.on{background:var(--accent);color:var(--on-accent)}
-.pill.bump{animation:bump 4.8s}
+.pill.bump{animation:bump 9.6s}
 @keyframes bump{50%{transform:scale(1.35)}}
 .m-search{display:flex;gap:8px}
 .input,.select{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:9px 11px;width:100%;min-width:0}
@@ -140,10 +140,10 @@ main{padding-block:18px 56px}
 .fld .select.chosen{border:2px solid var(--accent);background:var(--accent-2);font-weight:700}
 .m-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:8px;font-size:.9rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .m-bar b{color:var(--ink);font-size:1.05rem}
-.count-flash{animation:flash 8.8s}
+.count-flash{animation:flash 17.6s}
 @keyframes flash{30%{color:var(--turn);transform:scale(1.15)}}
 .m-results{display:grid;gap:8px;max-height:340px;overflow-y:auto;padding-right:2px}
-.res{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card);animation:in 5.6s ease both}
+.res{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card);animation:in 11.2s ease both}
 .res.sel{background:var(--age);border-color:var(--age-line)}
 @keyframes in{from{opacity:0;transform:translateY(6px)}}
 .res .pick input{width:18px;height:18px;accent-color:var(--accent);margin-top:3px;cursor:pointer}
@@ -168,7 +168,7 @@ mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
 .preview pre{margin:0;font:12.5px/1.5 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere}
 .preview ol{margin:4px 0 0;padding-left:1.3em}
 .status{font-size:.85rem;color:var(--good);font-weight:600;min-height:1.3em}
-.fly{position:absolute;z-index:35;width:12px;height:12px;border-radius:50%;background:var(--accent);pointer-events:none;transition:transform 8.8s cubic-bezier(.4,0,.2,1),opacity 8.8s}
+.fly{position:absolute;z-index:35;width:12px;height:12px;border-radius:50%;background:var(--accent);pointer-events:none;transition:transform 17.6s cubic-bezier(.4,0,.2,1),opacity 17.6s}
 
 /* Lesson 1 */
 .shelf{display:grid;gap:6px;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -177,12 +177,12 @@ mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
 .shelf .drawer .nm{font-size:.84rem;line-height:1.25}
 .drawer{appearance:none;border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:6px 10px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;text-align:left;cursor:pointer;position:relative;overflow:hidden}
 .drawer:hover{border-color:var(--accent)}
-.drawer .fill{position:absolute;left:0;top:0;bottom:0;width:0;opacity:.22;transition:width 16s cubic-bezier(.2,.7,.2,1)}
+.drawer .fill{position:absolute;left:0;top:0;bottom:0;width:0;opacity:.22;transition:width 32s cubic-bezier(.2,.7,.2,1)}
 .drawer .nm{position:relative;font-weight:600;font-size:.88rem;overflow-wrap:anywhere}
 .drawer .ct{position:relative;font:500 .82rem var(--f-mono);font-variant-numeric:tabular-nums}
 .drawer .yr{position:relative;grid-column:1/-1;font-size:.74rem;color:var(--ink-3)}
 .drawer.right{border-color:var(--good);background:var(--good-2)}
-.drawer.wrong{animation:shake 4.8s}
+.drawer.wrong{animation:shake 9.6s}
 @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .big{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
 .big .n{font:800 clamp(2.4rem,7vw,3.6rem)/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.03em;color:var(--accent)}
@@ -196,7 +196,7 @@ mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
 .q .qn{font:600 .72rem var(--f-mono);color:var(--ink-3)}
 .q p{margin:0;font-weight:600}
 .m-tab.right{color:var(--good);border-bottom-color:var(--good)}
-.m-tab.wrong{animation:shake 4.8s}
+.m-tab.wrong{animation:shake 9.6s}
 
 /* Lesson 8 */
 .rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -212,7 +212,7 @@ mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
 .cloud span{font-size:.74rem;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:1px 8px}
 .cloud span small{color:var(--ink-3);margin-left:3px;font-variant-numeric:tabular-nums}
 .river{display:flex;align-items:flex-end;gap:3px;height:64px}
-.river i{flex:1;background:var(--accent);opacity:.75;border-radius:3px 3px 0 0;transform-origin:bottom;animation:grow 12s ease both}
+.river i{flex:1;background:var(--accent);opacity:.75;border-radius:3px 3px 0 0;transform-origin:bottom;animation:grow 24s ease both}
 @keyframes grow{from{transform:scaleY(0)}}
 .river-y{display:flex;justify-content:space-between;font:500 .66rem var(--f-mono);color:var(--ink-3)}
 .factrow{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:8px 10px;font-size:.8rem;display:grid;gap:4px}
@@ -272,7 +272,7 @@ var GUIDE_URL="https://kislingjeff-oss.github.io/JAKPublicBlogDatabase/desk/Jour
 var CIK="https://channelsintoknowledge.com/";
 var COLORS=["#c98a6b","#6b9ac9","#8fb07a","#b58cc4","#d4b25e","#6fb8b0","#5f8a7d","#c47a8e"];
 var BLOGS=DATA.blogs, POSTS=DATA.posts;
-var SLOW=15.2;
+var SLOW=30.4;
 var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function $(id){return document.getElementById(id);}
@@ -357,7 +357,7 @@ function MiniDesk(opt){
     if(flash){R.sum.classList.remove("count-flash");void R.sum.offsetWidth;R.sum.classList.add("count-flash");}
     if(!n){R.res.innerHTML='<div class="empty">No posts match. Try fewer words, or press Reset by clearing the box.</div>';}
     else R.res.innerHTML=r.list.slice(0,12).map(function(p,i){var on=sel.indexOf(p.u)>-1;
-      return '<article class="res'+(on?" sel":"")+'" data-u="'+esc(p.u)+'" style="animation-delay:'+(i*640)+'ms">'+
+      return '<article class="res'+(on?" sel":"")+'" data-u="'+esc(p.u)+'" style="animation-delay:'+(i*1280)+'ms">'+
         '<div class="pick">'+(opt.export?'<input type="checkbox" aria-label="Select '+esc(p.t)+'"'+(on?" checked":"")+'>':'<span class="dot" style="background:'+COLORS[p.b]+'"></span>')+'</div>'+
         '<div><h4><a href="'+esc(p.u)+'" target="_blank" rel="noopener">'+highlight(p.t,r.terms)+'</a></h4>'+
         '<div class="meta"><span><span class="dot" style="background:'+COLORS[p.b]+'"></span>'+blogLink(p.b)+'</span><span>'+fmtDate(p.d)+'</span><span class="badge'+(p.th.length?" mature":"")+'">'+ageLabel(p)+'</span></div></div>'+
@@ -370,7 +370,7 @@ function MiniDesk(opt){
   function fly(from){if(reduce||!R.pill)return;var s=stage.getBoundingClientRect(),a=from.getBoundingClientRect(),b=R.pill.getBoundingClientRect();
     var d=document.createElement("div");d.className="fly";d.style.left=(a.left-s.left)+"px";d.style.top=(a.top-s.top)+"px";stage.appendChild(d);
     requestAnimationFrame(function(){d.style.transform="translate("+(b.left-a.left)+"px,"+(b.top-a.top)+"px) scale(.6)";d.style.opacity=".2";});
-    setTimeout(function(){d.remove();},9200);}
+    setTimeout(function(){d.remove();},18400);}
   this.toggle=function(u,el){var i=sel.indexOf(u);if(i>-1)sel.splice(i,1);else{sel.push(u);if(el)fly(el);}copied=false;setPill();render();};
   function exportText(){var L=sel.map(function(u){return POSTS.filter(function(p){return p.u===u;})[0];});
     if(fmt==="md")return "# Reading list\n\n"+L.map(function(p,i){return (i+1)+". ["+p.t+"]("+p.u+")  \n   "+BLOGS[p.b].name+", "+fmtDate(p.d)+"  \n   "+p.s;}).join("\n\n");
@@ -394,7 +394,7 @@ function MiniDesk(opt){
   R.res.addEventListener("change",function(e){if(e.target.type==="checkbox"){var a=e.target.closest(".res");self.toggle(a.getAttribute("data-u"),e.target);}});
   if(R.fmt)R.fmt.addEventListener("click",function(e){var b=e.target.closest("button");if(b)self.setFmt(b.getAttribute("data-f"));});
   if(R.copy)R.copy.addEventListener("click",function(){self.copy();});
-  this.setSelect=async function(k,v){var el=R[k];await pointAt(el);await tapPtr();el.value=String(v);el.dispatchEvent(new Event("change"));el.classList.add("glow");setTimeout(function(){el.classList.remove("glow");},32000);await sleep(500);};
+  this.setSelect=async function(k,v){var el=R[k];await pointAt(el);await tapPtr();el.value=String(v);el.dispatchEvent(new Event("change"));el.classList.add("glow");setTimeout(function(){el.classList.remove("glow");},64000);await sleep(500);};
   this.typeSearch=async function(text){await pointAt(R.q,40);await tapPtr();await typeInto(R.q,text);await sleep(300);await pointAt(R.go);await tapPtr();self.doSearch();await sleep(700);};
   readTerms();render();
 }
@@ -408,7 +408,7 @@ var L=[
  build:function(){var max=Math.max.apply(null,BLOGS.map(function(b){return b.count;}));
   body.innerHTML='<div class="big"><span class="n" id="cnt">0</span><span>posts in the whole Desk, 2015 to 2026</span></div><div class="shelf" id="shelf">'+BLOGS.map(function(b,i){return '<button class="drawer" type="button" data-i="'+i+'"><span class="fill" style="background:'+COLORS[i]+'" data-w="'+(b.count/max*100)+'"></span><span class="nm">'+esc(b.name)+'</span><span class="ct">'+b.count+'</span><span class="yr">'+(b.first===b.last?b.first:b.first+" to "+b.last)+'</span></button>';}).join("")+'</div><p class="note" style="margin:0">The newest blog is <a href="'+CIK+'" target="_blank" rel="noopener">Channels into Knowledge</a>.</p>';
   requestAnimationFrame(function(){body.querySelectorAll(".fill").forEach(function(f){f.style.width=f.getAttribute("data-w")+"%";});});
-  var c=$("cnt"),t0=performance.now(),tot=DATA.total;(function tick(t){var k=Math.min(1,(t-t0)/(reduce?1:19200));c.textContent=Math.round(tot*(1-Math.pow(1-k,3))).toLocaleString("en-US");if(k<1)requestAnimationFrame(tick);})(t0);
+  var c=$("cnt"),t0=performance.now(),tot=DATA.total;(function tick(t){var k=Math.min(1,(t-t0)/(reduce?1:38400));c.textContent=Math.round(tot*(1-Math.pow(1-k,3))).toLocaleString("en-US");if(k<1)requestAnimationFrame(tick);})(t0);
   $("shelf").addEventListener("click",function(e){var d=e.target.closest(".drawer");if(!d)return;var i=+d.getAttribute("data-i"),best=BLOGS.reduce(function(a,b,j){return b.count>BLOGS[a].count?j:a;},0);
    if(i===best){d.classList.add("right");win();}else{d.classList.remove("wrong");void d.offsetWidth;d.classList.add("wrong");}});},
  demo:async function(my){var dr=body.querySelectorAll(".drawer");say("Each bar is one blog. The number is how many posts it holds.");await pointAt(dr[6],60);await sleep(1400);
@@ -425,7 +425,7 @@ var L=[
   function q(){$("tq").innerHTML=qi<Q.length?'<span class="qn">Question '+(qi+1)+' of 3</span><p>'+esc(Q[qi][0])+'</p>':'<p>All three right. You know your way around.</p>';}
   show(0);q();this._show=show;
   $("tt").addEventListener("click",function(e){var b=e.target.closest(".m-tab");if(!b)return;var i=+b.getAttribute("data-i");show(i);
-   if(qi<Q.length){if(i===Q[qi][1]){b.classList.add("right");setTimeout(function(){b.classList.remove("right");},12800);qi++;q();if(qi===Q.length)win();}else{b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");}}});},
+   if(qi<Q.length){if(i===Q[qi][1]){b.classList.add("right");setTimeout(function(){b.classList.remove("right");},25600);qi++;q();if(qi===Q.length)win();}else{b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");}}});},
  demo:async function(my){var tabs=body.querySelectorAll("#tt .m-tab"),self=L[1];
   for(var i=0;i<tabs.length;i++){tabs[i].scrollIntoView({block:"nearest",inline:"center",behavior:reduce?"auto":"smooth"});await sleep(200);await pointAt(tabs[i]);await tapPtr();self._show(i);say(tabs[i].textContent);await sleep(1300);}
   say("Your turn. Answer the questions below the tabs.");await sleep(1600);}
@@ -489,7 +489,7 @@ var L=[
   body.innerHTML='<div class="rooms" id="rooms">'+
   '<button class="room" type="button" data-k="b"><h3>Browse <small></small></h3><p>Pick a blog or a popular tag.</p><div class="more-info"><div class="cloud">'+DATA.tags.slice(0,10).map(function(t){return '<span>'+esc(t[0])+'<small>'+t[1]+'</small></span>';}).join("")+'</div><span>The number is how many posts use that tag. Tap a tag in the real Desk to see those posts in Search.</span></div></button>'+
   '<button class="room" type="button" data-k="f"><h3>Verified Facts <small></small></h3><p>History the posts rely on, checked in October 2026.</p><div class="more-info"><div class="factrow"><span><b>'+esc(f.d)+'</b> · <span class="vtag">'+esc(f.v)+'</span></span><span>'+esc(f.s)+'</span><span>Source: <a href="'+esc(f.src[2])+'" target="_blank" rel="noopener">'+esc(f.src[0])+'</a> · in '+f.np+' posts</span></div><span>'+DATA.topics.length+' topics, from '+esc(DATA.topics[0][0])+' to '+esc(DATA.topics[DATA.topics.length-1][0])+'. Corrected means a post got a detail wrong, and the fact shows what is right.</span></div></button>'+
-  '<button class="room" type="button" data-k="s"><h3>Ten Years of Stories <small></small></h3><p>Every post on a timeline.</p><div class="more-info"><div class="river">'+DATA.years.map(function(y,i){return '<i style="height:'+(y[1]/maxy*100)+'%;animation-delay:'+(i*800)+'ms" title="'+y[0]+': '+y[1]+' posts"></i>';}).join("")+'</div><div class="river-y"><span>2015</span><span>2020: '+DATA.years[5][1]+' posts</span><span>2026</span></div><span>Tap a month to see its posts beside the nearest verified event.</span></div></button>'+
+  '<button class="room" type="button" data-k="s"><h3>Ten Years of Stories <small></small></h3><p>Every post on a timeline.</p><div class="more-info"><div class="river">'+DATA.years.map(function(y,i){return '<i style="height:'+(y[1]/maxy*100)+'%;animation-delay:'+(i*1600)+'ms" title="'+y[0]+': '+y[1]+' posts"></i>';}).join("")+'</div><div class="river-y"><span>2015</span><span>2020: '+DATA.years[5][1]+' posts</span><span>2026</span></div><span>Tap a month to see its posts beside the nearest verified event.</span></div></button>'+
   '<button class="room" type="button" data-k="g"><h3>Student Guide <small></small></h3><p>Every step, with pictures.</p><div class="more-info"><span>Keep it open beside the Desk, or <a href="'+GUIDE_URL+'" target="_blank" rel="noopener">get the Word version</a> to print.</span></div></button></div>';
   $("rooms").addEventListener("click",function(e){var r=e.target.closest(".room");if(!r||e.target.closest("a"))return;r.classList.toggle("open");r.classList.add("seen");r.querySelector("small").textContent="opened";seen[r.getAttribute("data-k")]=1;if(Object.keys(seen).length===4)win();});},
  demo:async function(my){var rs=body.querySelectorAll(".room");for(var i=0;i<rs.length;i++){await pointAt(rs[i],40,24);await tapPtr();rs[i].classList.add("open");say(rs[i].querySelector("p").textContent);await sleep(1900);rs[i].classList.remove("open");}
@@ -535,9 +535,9 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
   if(focus){$("explain").querySelector("h2").setAttribute("tabindex","-1");$("explain").querySelector("h2").focus({preventScroll:true});window.scrollTo({top:Math.max(0,$("explain").getBoundingClientRect().top+scrollY-20),behavior:reduce?"auto":"smooth"});}
 }
 function endDemo(){var w=$("watch"),s=$("skip");if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
-async function play(l){stopDemo();var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
+async function play(l){run++;ptr.classList.remove("show");var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
   if(innerWidth<900)stage.scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"});
-  await new Promise(function(r){setTimeout(r,reduce?50:6400);});
+  await new Promise(function(r){setTimeout(r,reduce?50:12800);});
   try{await l.demo(my);}catch(e){if(e!=="stop")console.error(e);return;}
   if(my===run)endDemo();}
 $("path").addEventListener("click",function(e){var b=e.target.closest(".stop");if(b)open(+b.getAttribute("data-i"),true);});
