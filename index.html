@@ -266,6 +266,7 @@ main{padding-block:10px 14px}
 .msg{gap:5px}
 .btn{padding:7px 13px}
 .task{padding:8px 12px;gap:3px}
+.task.nolabel .lbl{display:none}
 .task[hidden],.side[hidden],.qz[hidden],.btn[hidden]{display:none}
 .caption{padding:8px 12px;font-size:.94rem;min-height:0}
 .nav{margin-top:0;margin-left:auto;display:flex;gap:8px}
@@ -564,11 +565,11 @@ var L=[
  demo:null}
 ];
 
-var cur=0;
+var cur=0,seen={},wonNow={};
 function fit(){var e=$("explain");if(e)document.documentElement.style.setProperty("--top",Math.round(e.getBoundingClientRect().top+window.scrollY)+"px");}
 window.addEventListener("resize",fit);
 function bindDesk(){if(!desk||!L[cur].check)return;desk.onChange=function(){if($("mode")&&$("mode").classList.contains("watch"))return;if(L[cur].check(desk.state()))win();};}
-function win(){var l=L[cur];if(!done[l.id]){done[l.id]=1;saveDone();}var t=$("task");if(t){t.classList.add("won");t.querySelector(".lbl").textContent="Done";
+function win(){var l=L[cur];wonNow[l.id]=1;if(!done[l.id]){done[l.id]=1;saveDone();}var t=$("task");if(t){t.classList.add("won");t.querySelector(".lbl").textContent="Done";
   var p=t.querySelector(".hint");if(p)p.textContent=cur<L.length-1?"Nice work. Go on to the next lesson when you are ready.":"You finished every lesson.";}
   drawPath();setMode("");}
 function drawPath(){var n=0;$("path").innerHTML=L.map(function(l,i){if(done[l.id])n++;return '<li><button class="stop'+(done[l.id]?" done":"")+'" type="button" data-i="'+i+'"'+(i===cur?' aria-current="step"':'')+'><span class="n"><span>'+(i+1)+'</span></span>'+esc(l.name)+'</button></li>';}).join("");
@@ -578,16 +579,16 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
    '<div class="controls">'+(l.demo?'<button class="btn primary" type="button" id="watch"><span class="ico" aria-hidden="true"></span>Watch how</button><button class="btn" type="button" id="skip" hidden>Stop</button>':'')+'<span class="nav"><button class="btn" type="button" id="prev"'+(i===0?" disabled":"")+'>Back</button><button class="btn" type="button" id="next"'+(i===L.length-1?" disabled":"")+'>Next lesson</button></span></div>'+
    '<div class="msg" id="msgbox" hidden><span class="mode" id="mode">Ready</span><p class="caption" id="caption"></p></div>'+
    '<div class="side" id="side"></div>'+
-   '<div class="task'+(done[l.id]?" won":"")+'" id="task"'+(l.demo&&!done[l.id]?' hidden':'')+'><span class="lbl">'+(done[l.id]?"Done":"Your turn")+'</span><p>'+esc(l.task.text)+'</p>'+(l.task.hint?'<span class="hint">'+esc(l.task.hint)+'</span>':'')+'</div>';
-  l.build();bindDesk();setMode("");drawPath();if(l.id==="tabs"&&$("task").hidden)$("side").hidden=true;fit();
+   '<div class="task'+(wonNow[l.id]?" won":"")+(l.demo&&!seen[l.id]?" nolabel":"")+'" id="task"><span class="lbl">'+(wonNow[l.id]?"Done":"Your turn")+'</span><p>'+esc(l.task.text)+'</p>'+(l.task.hint?'<span class="hint">'+esc(l.task.hint)+'</span>':'')+'</div>';
+  l.build();bindDesk();setMode("");drawPath();if(l.id==="tabs"&&l.demo&&!seen[l.id])$("side").hidden=true;fit();
   if(l.demo){$("watch").addEventListener("click",function(){play(l);});$("skip").addEventListener("click",function(){stopDemo();endDemo();});}
   $("prev").addEventListener("click",function(){if(cur>0)open(cur-1,true);});
   $("next").addEventListener("click",function(){if(cur<L.length-1)open(cur+1,true);});
   try{history.replaceState(null,"","#"+l.id);}catch(e){}
   if(focus){$("explain").querySelector("h2").setAttribute("tabindex","-1");$("explain").querySelector("h2").focus({preventScroll:true});window.scrollTo({top:Math.max(0,$("explain").getBoundingClientRect().top+scrollY-20),behavior:reduce?"auto":"smooth"});}
 }
-function endDemo(){var w=$("watch"),s=$("skip");if($("task"))$("task").hidden=false;if($("side"))$("side").hidden=false;if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
-async function play(l){run++;ptr.classList.remove("show");EXTRA=l.id==="export"?2:l.id==="tabs"?0.25:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
+function endDemo(){var w=$("watch"),s=$("skip");seen[L[cur].id]=1;if($("task"))$("task").classList.remove("nolabel");if($("side"))$("side").hidden=false;if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
+async function play(l){run++;ptr.classList.remove("show");if($("task"))$("task").classList.add("nolabel");if(l.id==="tabs"&&$("side"))$("side").hidden=true;EXTRA=l.id==="export"?2:l.id==="tabs"?0.25:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
   if(innerWidth<900)stage.scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"});
   await new Promise(function(r){setTimeout(r,reduce?50:1100);});
   try{await l.demo(my);}catch(e){if(e!=="stop")console.error(e);return;}
