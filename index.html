@@ -111,6 +111,7 @@ main{padding-block:18px 56px}
 .side{display:grid;gap:10px}
 .side:empty{display:none}
 .reads-box{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;display:grid;gap:6px}
+.reads-how{font-size:.9rem;color:var(--ink)}
 .reads-box .lbl{font:700 .7rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .caption.show{opacity:1;transform:none}
 .caption.turn{background:var(--turn-2);border-color:var(--turn)}
@@ -378,7 +379,7 @@ function MiniDesk(opt){
   var h="";
   if(opt.tabs)h+='<div class="m-tabs" role="tablist"><button class="m-tab" role="tab" aria-selected="true">Search</button><button class="m-tab" role="tab" aria-selected="false" data-r="sel">Selected &amp; Export <span class="pill" data-r="pill">0</span></button></div>';
   h+='<form class="m-search" data-r="form"><label class="sr" for="mq">Search the practice posts</label><input class="input" id="mq" data-r="q" type="search" autocomplete="off" placeholder="Search titles, tags and summaries"><button class="btn primary" type="submit" data-r="go">Search</button></form>';
-  if(opt.reads===true&&$("side"))$("side").innerHTML='<div class="reads-box"><span class="lbl">How the Desk reads your search</span><div class="reads" id="reads"></div></div>';
+  if(opt.reads===true&&$("side"))$("side").innerHTML='<div class="reads-box"><span class="lbl">How the Desk reads your search</span><span class="reads-how">Type your words in the <strong>Search</strong> box at the top of the Practice Desk on the right, then press the green <strong>Search</strong> button. This box shows how the Desk reads them.</span><div class="reads" id="reads"></div></div>';
   if(opt.filters){
     var yrs="";for(var y=2015;y<=2026;y++)yrs+='<option>'+y+'</option>';
     var bl='<option value="">All blogs</option>'+BLOGS.map(function(b,i){return '<option value="'+i+'">'+esc(b.name.replace(/ \(formerly.*\)/,""))+'</option>';}).join("");
@@ -393,7 +394,7 @@ function MiniDesk(opt){
   var R={};body.querySelectorAll("[data-r]").forEach(function(e){R[e.getAttribute("data-r")]=e;});R.reads=$("reads");this.R=R;
   if(R.to)R.to.value="2026";
   function readTerms(){if(!R.reads)return;var t=parseQuery(R.q.value);
-    R.reads.innerHTML=t.length?'<span>The Desk reads this as:</span>'+t.map(function(x){return '<span class="tok'+(x.neg?" neg":x.phrase?" ph":"")+'"><b>'+(x.neg?"leave out":x.phrase?"phrase":"word")+'</b>'+esc(x.v)+'</span>';}).join(""):'<span>Type words, then press Search.</span>';}
+    R.reads.innerHTML=t.length?'<span>The Desk reads this as:</span>'+t.map(function(x){return '<span class="tok'+(x.neg?" neg":x.phrase?" ph":"")+'"><b>'+(x.neg?"leave out":x.phrase?"phrase":"word")+'</b>'+esc(x.v)+'</span>';}).join(""):'<span>Nothing typed in the Search box yet.</span>';}
   function render(flash){
     var r=search(st);self.results=r.list;self.terms=r.terms;
     var n=r.list.length;
@@ -581,15 +582,15 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
    '<div class="msg" id="msgbox" hidden><span class="mode" id="mode">Ready</span><p class="caption" id="caption"></p></div>'+
    '<div class="side" id="side"></div>'+
    '<div class="task'+(wonNow[l.id]?" won":"")+(l.demo&&!seen[l.id]?" nolabel":"")+'" id="task"><span class="lbl">'+(wonNow[l.id]?"Done":"Your turn")+'</span><p>'+esc(wonNow[l.id]?nextText(i):l.task.text)+'</p>'+(l.task.hint&&!wonNow[l.id]?'<span class="hint">'+esc(l.task.hint)+'</span>':'')+'</div>';
-  l.build();bindDesk();setMode("");drawPath();if(l.id==="tabs"&&l.demo&&!seen[l.id])$("side").hidden=true;if(l.id==="check")$("task").hidden=true;fit();
+  l.build();bindDesk();setMode("");drawPath();if(l.id==="check")$("task").hidden=true;fit();
   if(l.demo){$("watch").addEventListener("click",function(){play(l);});$("skip").addEventListener("click",function(){stopDemo();endDemo();});}
   $("prev").addEventListener("click",function(){if(cur>0)open(cur-1,true);});
   $("next").addEventListener("click",function(){if(cur<L.length-1)open(cur+1,true);});
   try{history.replaceState(null,"","#"+l.id);}catch(e){}
   if(focus){$("explain").querySelector("h2").setAttribute("tabindex","-1");$("explain").querySelector("h2").focus({preventScroll:true});window.scrollTo({top:Math.max(0,$("explain").getBoundingClientRect().top+scrollY-20),behavior:reduce?"auto":"smooth"});}
 }
-function endDemo(){var w=$("watch"),s=$("skip");seen[L[cur].id]=1;if(L[cur].id==="search"&&desk){desk.R.q.value="";desk.R.q.dispatchEvent(new Event("input"));desk.doSearch();}if($("msgbox"))setTimeout(function(){$("msgbox").hidden=true;},0);if($("task"))$("task").classList.remove("nolabel");if($("side"))$("side").hidden=false;if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
-async function play(l){run++;ptr.classList.remove("show");if($("task"))$("task").classList.add("nolabel");if(l.id==="tabs"&&$("side"))$("side").hidden=true;EXTRA=l.id==="export"?2:l.id==="tabs"?0.25:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
+function endDemo(){var w=$("watch"),s=$("skip");seen[L[cur].id]=1;if(L[cur].id==="search"&&desk){desk.R.q.value="";desk.R.q.dispatchEvent(new Event("input"));desk.doSearch();}if($("msgbox"))setTimeout(function(){$("msgbox").hidden=true;},0);if($("task")){$("task").classList.remove("nolabel");if(L[cur].id!=="check")$("task").hidden=false;}if($("side"))$("side").hidden=false;if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
+async function play(l){run++;ptr.classList.remove("show");if($("task"))$("task").classList.add("nolabel");if(l.id==="tabs"&&$("side")){$("side").hidden=true;$("task").hidden=true;}EXTRA=l.id==="export"?2:l.id==="tabs"?0.25:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
   if(innerWidth<900)stage.scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"});
   await new Promise(function(r){setTimeout(r,reduce?50:1100);});
   try{await l.demo(my);}catch(e){if(e!=="stop")console.error(e);return;}
