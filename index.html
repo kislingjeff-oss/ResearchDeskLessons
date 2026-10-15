@@ -402,7 +402,7 @@ function MiniDesk(opt){
 var desk=null;
 var L=[
 {id:"meet",name:"Meet the Desk",
- explain:function(){return '<p>The Desk is a library of blog posts. Each post is a short, true story, often about people working for peace, justice, the land and each other.</p><ul><li>More than 3,200 posts, from 2015 to today.</li><li>They come from eight blogs. A blog is like a shelf in the library.</li><li>New posts are added each day.</li></ul><p class="note">The bars on the right show how many posts each blog holds. The longer the bar, the bigger the shelf.</p>';},
+ explain:function(){return '<p>The Desk is a library of blog posts. Each post is a short, true story, often about people working for peace, justice, the land and each other.</p><ul><li>More than 3,200 posts, from 2015 to today.</li><li>They come from eight blogs. A blog is like a shelf in the library.</li><li>New posts on the active blogs are added frequently.</li></ul><p class="note">The bars on the right show how many posts each blog holds. The longer the bar, the bigger the shelf.</p>';},
  task:{text:"Tap the blog that holds the most posts.",hint:"Look for the longest bar."},
  build:function(){var max=Math.max.apply(null,BLOGS.map(function(b){return b.count;}));
   body.innerHTML='<div class="big"><span class="n" id="cnt">0</span><span>posts in the whole Desk, 2015 to 2026</span></div><div class="shelf" id="shelf">'+BLOGS.map(function(b,i){return '<button class="drawer" type="button" data-i="'+i+'"><span class="fill" style="background:'+COLORS[i]+'" data-w="'+(b.count/max*100)+'"></span><span class="nm">'+esc(b.name)+'</span><span class="ct">'+b.count+'</span><span class="yr">'+(b.first===b.last?b.first:b.first+" to "+b.last)+'</span></button>';}).join("")+'</div><p class="note" style="margin:0">The newest blog is <a href="'+CIK+'" target="_blank" rel="noopener">Channels into Knowledge</a>.</p>';
@@ -535,7 +535,7 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
   if(focus){$("explain").querySelector("h2").setAttribute("tabindex","-1");$("explain").querySelector("h2").focus({preventScroll:true});window.scrollTo({top:Math.max(0,$("explain").getBoundingClientRect().top+scrollY-20),behavior:reduce?"auto":"smooth"});}
 }
 function endDemo(){var w=$("watch"),s=$("skip");if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
-async function play(l){run++;ptr.classList.remove("show");EXTRA=l.id==="export"?2:l.id==="tabs"?0.4:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
+async function play(l){run++;ptr.classList.remove("show");EXTRA=l.id==="export"?2:l.id==="tabs"?0.2:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
   if(innerWidth<900)stage.scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"});
   await new Promise(function(r){setTimeout(r,reduce?50:1100);});
   try{await l.demo(my);}catch(e){if(e!=="stop")console.error(e);return;}
