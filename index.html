@@ -581,7 +581,7 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
    '<div class="msg" id="msgbox" hidden><span class="mode" id="mode">Ready</span><p class="caption" id="caption"></p></div>'+
    '<div class="side" id="side"></div>'+
    '<div class="task'+(wonNow[l.id]?" won":"")+(l.demo&&!seen[l.id]?" nolabel":"")+'" id="task"><span class="lbl">'+(wonNow[l.id]?"Done":"Your turn")+'</span><p>'+esc(wonNow[l.id]?nextText(i):l.task.text)+'</p>'+(l.task.hint&&!wonNow[l.id]?'<span class="hint">'+esc(l.task.hint)+'</span>':'')+'</div>';
-  l.build();bindDesk();setMode("");drawPath();if(l.id==="tabs"&&l.demo&&!seen[l.id])$("side").hidden=true;fit();
+  l.build();bindDesk();setMode("");drawPath();if(l.id==="tabs"&&l.demo&&!seen[l.id])$("side").hidden=true;if(l.id==="check")$("task").hidden=true;fit();
   if(l.demo){$("watch").addEventListener("click",function(){play(l);});$("skip").addEventListener("click",function(){stopDemo();endDemo();});}
   $("prev").addEventListener("click",function(){if(cur>0)open(cur-1,true);});
   $("next").addEventListener("click",function(){if(cur<L.length-1)open(cur+1,true);});
