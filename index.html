@@ -472,7 +472,7 @@ var L=[
   function q(){$("tq").innerHTML=qi<Q.length?'<span class="qn">Question '+(qi+1)+' of 3</span><p>'+esc(Q[qi][0])+'</p>':'<p>All three right. You know your way around.</p>';}
   show(0);q();this._show=show;
   $("tt").addEventListener("click",function(e){var b=e.target.closest(".m-tab");if(!b)return;var i=+b.getAttribute("data-i");show(i);
-   if(qi<Q.length){if(i===Q[qi][1]){b.classList.add("right");setTimeout(function(){b.classList.remove("right");},2250);qi++;q();if(qi===Q.length)win();}else{b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");}}});},
+   if(qi<Q.length){if(i===Q[qi][1]){b.classList.add("right");setTimeout(function(){b.classList.remove("right");},2250);qi++;q();if(qi===Q.length){win();$("side").hidden=true;}}else{b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");}}});},
  demo:async function(my){var tabs=body.querySelectorAll("#tt .m-tab"),self=L[1];
   for(var i=0;i<tabs.length;i++){tabs[i].scrollIntoView({block:"nearest",inline:"center",behavior:reduce?"auto":"smooth"});await sleep(200);await pointAt(tabs[i]);await tapPtr();self._show(i);say("The "+tabs[i].textContent+" tab: "+$("ti").querySelector("p").textContent);await sleep(1300);}
   }
@@ -566,11 +566,12 @@ var L=[
 ];
 
 var cur=0,seen={},wonNow={};
+function nextText(i){return i<L.length-1?"Well done. Click Next lesson to go on to Lesson "+(i+2)+": "+L[i+1].name+".":"You finished every lesson. Open the Journal Research Desk and try a search of your own.";}
 function fit(){var e=$("explain");if(e)document.documentElement.style.setProperty("--top",Math.round(e.getBoundingClientRect().top+window.scrollY)+"px");}
 window.addEventListener("resize",fit);
 function bindDesk(){if(!desk||!L[cur].check)return;desk.onChange=function(){if($("mode")&&$("mode").classList.contains("watch"))return;if(L[cur].check(desk.state()))win();};}
 function win(){var l=L[cur];wonNow[l.id]=1;if(!done[l.id]){done[l.id]=1;saveDone();}var t=$("task");if(t){t.classList.add("won");t.querySelector(".lbl").textContent="Done";
-  var p=t.querySelector(".hint");if(p)p.textContent=cur<L.length-1?"Nice work. Go on to the next lesson when you are ready.":"You finished every lesson.";}
+  t.querySelector("p").textContent=nextText(cur);var p=t.querySelector(".hint");if(p)p.remove();}
   drawPath();setMode("");}
 function drawPath(){var n=0;$("path").innerHTML=L.map(function(l,i){if(done[l.id])n++;return '<li><button class="stop'+(done[l.id]?" done":"")+'" type="button" data-i="'+i+'"'+(i===cur?' aria-current="step"':'')+'><span class="n"><span>'+(i+1)+'</span></span>'+esc(l.name)+'</button></li>';}).join("");
   $("meter").style.width=(n/L.length*100)+"%";$("meter-label").textContent=n+" of "+L.length+" lessons done";}
@@ -579,7 +580,7 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
    '<div class="controls">'+(l.demo?'<button class="btn primary" type="button" id="watch"><span class="ico" aria-hidden="true"></span>Watch how</button><button class="btn" type="button" id="skip" hidden>Stop</button>':'')+'<span class="nav"><button class="btn" type="button" id="prev"'+(i===0?" disabled":"")+'>Back</button><button class="btn" type="button" id="next"'+(i===L.length-1?" disabled":"")+'>Next lesson</button></span></div>'+
    '<div class="msg" id="msgbox" hidden><span class="mode" id="mode">Ready</span><p class="caption" id="caption"></p></div>'+
    '<div class="side" id="side"></div>'+
-   '<div class="task'+(wonNow[l.id]?" won":"")+(l.demo&&!seen[l.id]?" nolabel":"")+'" id="task"><span class="lbl">'+(wonNow[l.id]?"Done":"Your turn")+'</span><p>'+esc(l.task.text)+'</p>'+(l.task.hint?'<span class="hint">'+esc(l.task.hint)+'</span>':'')+'</div>';
+   '<div class="task'+(wonNow[l.id]?" won":"")+(l.demo&&!seen[l.id]?" nolabel":"")+'" id="task"><span class="lbl">'+(wonNow[l.id]?"Done":"Your turn")+'</span><p>'+esc(wonNow[l.id]?nextText(i):l.task.text)+'</p>'+(l.task.hint&&!wonNow[l.id]?'<span class="hint">'+esc(l.task.hint)+'</span>':'')+'</div>';
   l.build();bindDesk();setMode("");drawPath();if(l.id==="tabs"&&l.demo&&!seen[l.id])$("side").hidden=true;fit();
   if(l.demo){$("watch").addEventListener("click",function(){play(l);});$("skip").addEventListener("click",function(){stopDemo();endDemo();});}
   $("prev").addEventListener("click",function(){if(cur>0)open(cur-1,true);});
@@ -587,7 +588,7 @@ function open(i,focus){stopDemo();cur=i;var l=L[i];desk=null;
   try{history.replaceState(null,"","#"+l.id);}catch(e){}
   if(focus){$("explain").querySelector("h2").setAttribute("tabindex","-1");$("explain").querySelector("h2").focus({preventScroll:true});window.scrollTo({top:Math.max(0,$("explain").getBoundingClientRect().top+scrollY-20),behavior:reduce?"auto":"smooth"});}
 }
-function endDemo(){var w=$("watch"),s=$("skip");seen[L[cur].id]=1;if(L[cur].id==="tabs"&&$("msgbox"))setTimeout(function(){$("msgbox").hidden=true;},0);if($("task"))$("task").classList.remove("nolabel");if($("side"))$("side").hidden=false;if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
+function endDemo(){var w=$("watch"),s=$("skip");seen[L[cur].id]=1;if($("msgbox"))setTimeout(function(){$("msgbox").hidden=true;},0);if($("task"))$("task").classList.remove("nolabel");if($("side"))$("side").hidden=false;if(w){w.disabled=false;w.lastChild.textContent="Watch again";}if(s)s.hidden=true;ptr.classList.remove("show");setMode("try");}
 async function play(l){run++;ptr.classList.remove("show");if($("task"))$("task").classList.add("nolabel");if(l.id==="tabs"&&$("side"))$("side").hidden=true;EXTRA=l.id==="export"?2:l.id==="tabs"?0.25:1;ptr.style.transitionDuration=(1.75*EXTRA)+"s, .6s";var my=++run;$("watch").disabled=true;$("skip").hidden=false;setMode("watch");
   if(innerWidth<900)stage.scrollIntoView({block:"start",behavior:reduce?"auto":"smooth"});
   await new Promise(function(r){setTimeout(r,reduce?50:1100);});
